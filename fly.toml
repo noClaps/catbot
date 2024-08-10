@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for catbot-aged-sea-7030 on 2024-08-11T00:02:24+01:00
+# fly.toml app configuration file generated for catbot-crimson-grass-3155 on 2024-08-11T00:11:38+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'catbot-aged-sea-7030'
+app = 'catbot-crimson-grass-3155'
 primary_region = 'lhr'
 
 [build]
