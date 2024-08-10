@@ -1,0 +1,17 @@
+{
+  "name": "catbot",
+  "type": "module",
+  "dependencies": {
+    "discord.js": "^14.15.3"
+  },
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "start": "bun deploy.ts && bun index.ts"
+  }
+}
