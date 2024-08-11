@@ -14,13 +14,10 @@ try {
 
   const clientId = Bun.env.CLIENT_ID;
   if (!clientId) throw new Error("Client ID not found");
-  const guildId = Bun.env.GUILD_ID;
-  if (!guildId) throw new Error("Guild ID not found");
 
-  const data = (await rest.put(
-    Routes.applicationGuildCommands(clientId, guildId),
-    { body: commands },
-  )) as { length: number };
+  const data = (await rest.put(Routes.applicationCommands(clientId), {
+    body: commands,
+  })) as { length: number };
 
   console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 } catch (error) {
