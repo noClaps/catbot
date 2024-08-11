@@ -4,14 +4,13 @@
   "dependencies": {
     "discord.js": "^14.15.3"
   },
-  "module": "index.ts",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "^1.1.6"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.5.4"
   },
   "scripts": {
-    "start": "bun deploy.ts && bun index.ts"
+    "start": "bun index.ts"
   }
 }
