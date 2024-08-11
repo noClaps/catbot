@@ -1,5 +1,3 @@
-// TODO: Add figure out GIF functionality
-
 import {
   AttachmentBuilder,
   AutocompleteInteraction,
@@ -28,6 +26,12 @@ export default {
         .setName("text")
         .setDescription("Make the cat say something!")
         .setRequired(false),
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("gif")
+        .setDescription("Moving cat wooooo")
+        .setRequired(false),
     ),
 
   async autocomplete(interaction: AutocompleteInteraction) {
@@ -46,6 +50,7 @@ export default {
   async execute(interaction: ChatInputCommandInteraction) {
     const tag = interaction.options.getString("tag");
     const text = interaction.options.getString("text");
+    const gif = interaction.options.getBoolean("gif");
 
     if (!availableTags.includes(tag ?? "")) {
       await interaction.reply({
@@ -59,23 +64,42 @@ export default {
     let catImageURL: string;
 
     switch (true) {
-      case tag && !text:
+      case tag && !gif && !text:
         catImageURL = `https://cataas.com/cat/${tag}`;
         break;
 
-      case !tag && !!text:
+      case !tag && gif && !text:
+        catImageURL = `https://cataas.com/cat/gif`;
+        break;
+
+      case !tag && !gif && !!text:
         catImageURL = `https://cataas.com/cat/says/${encodeURIComponent(text)}`;
         break;
 
-      case tag && !!text:
+      case tag && !gif && !!text:
         catImageURL = `https://cataas.com/cat/${tag}/says/${encodeURIComponent(text)}`;
         break;
 
+      case !tag && gif && !!text:
+        catImageURL = `https://cataas.com/cat/gif/says/${encodeURIComponent(text)}`;
+        break;
+
       default:
+        if (tag && gif) {
+          await interaction.reply({
+            content: `You can't use both "tag" and "gif" :(`,
+            ephemeral: true,
+          });
+          return;
+        }
         catImageURL = `https://cataas.com/cat`;
     }
 
-    console.log(tag, text, catImageURL);
+    console.log(
+      `tag: ${tag}, gif: ${gif}, text: ${text}, image URL: ${catImageURL}`,
+    );
+
+    await interaction.reply("Loading...");
 
     const response = await fetch(catImageURL);
     const fileType = response.headers.get("Content-Type")?.split("/")[1];
@@ -87,6 +111,10 @@ export default {
     const embed = new EmbedBuilder().setImage(
       `attachment://cat-image.${fileType}`,
     );
-    await interaction.reply({ embeds: [embed], files: [file] });
+    await interaction.editReply({
+      content: "",
+      embeds: [embed],
+      files: [file],
+    });
   },
 };
