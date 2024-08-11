@@ -96,7 +96,7 @@ export default {
     }
 
     console.log(
-      `tag: ${tag}, gif: ${gif}, text: ${text}, image URL: ${catImageURL}`,
+      `server name: ${interaction.guild?.name}, server ID: ${interaction.guildId}, tag: ${tag}, gif: ${gif}, text: ${text}, image URL: ${catImageURL}`,
     );
 
     await interaction.reply("Loading...");
