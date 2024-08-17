@@ -1,4 +1,4 @@
-# Catbot
+# CatBot
 
 A Discord bot to generate images of cats. The bot is powered by the [CATAAS (Cat as a service) API](https://cataas.com).
 
@@ -7,7 +7,7 @@ A Discord bot to generate images of cats. The bot is powered by the [CATAAS (Cat
 1. Clone the repository.
 
    ```sh
-   git clone https://github.com/noClaps/catbot.git
+   git clone https://gitlab.com/noClaps/catbot.git
    cd catbot/
    ```
 
