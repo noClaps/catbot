@@ -1,16 +1,17 @@
 {
   "name": "catbot",
-  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "bun src/register.ts && wrangler deploy --minify"
+  },
   "dependencies": {
-    "discord.js": "^14.15.3"
+    "discord-interactions": "^4.0.0",
+    "hono": "^4.5.6"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.6"
-  },
-  "peerDependencies": {
-    "typescript": "^5.5.4"
-  },
-  "scripts": {
-    "start": "bun index.ts"
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "@types/bun": "^1.1.6",
+    "typescript": "^5.5.4",
+    "wrangler": "^3.57.2"
   }
 }
