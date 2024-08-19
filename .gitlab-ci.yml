@@ -3,6 +3,6 @@ image: homebrew/brew
 deploy:
   before_script:
     - brew install node oven-sh/bun/bun
-    - bun install
+    - bun install --frozen-lockfile
   script:
     - bun run deploy
