@@ -25,20 +25,12 @@ A Discord bot to generate images of cats. The bot is powered by the [CATAAS (Cat
 ## Bot commands
 
 ```
-/cat [tag: string] [gif: boolean] [text: string]
+/cat [tag: string] [text: string]
 ```
 
 ### `tag`
 
 A tag to describe the kind of cat you'd like. There is a list of tags available [here](https://cataas.com/api/tags), and the command will provide autocompletion for tags as you type them.
-
-Incompatible with `gif`.
-
-### `gif`
-
-A boolean (True/False) value for whether the returned image should be a GIF or not. There are only 2 accepted values for this: `True` and `False`.
-
-Incompatible with `tag`.
 
 ### `text`
 
