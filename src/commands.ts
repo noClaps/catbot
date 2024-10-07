@@ -3,7 +3,6 @@ import {
 	InteractionResponseType,
 } from "discord-interactions";
 import { JSONResponse } from "./index";
-import { combineAfterResponseHooks } from "hono/ssg";
 
 export const CAT_COMMAND = {
 	name: "cat",

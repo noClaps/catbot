@@ -1,17 +1,17 @@
 {
-  "name": "catbot",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "bun src/register.ts && wrangler deploy --minify"
-  },
-  "dependencies": {
-    "discord-interactions": "^4.1.0",
-    "hono": "^4.6.3"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241004.0",
-    "@types/bun": "^1.1.10",
-    "typescript": "^5.6.2",
-    "wrangler": "^3.80.0"
-  }
+	"name": "catbot",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "bun src/register.ts && wrangler deploy --minify"
+	},
+	"dependencies": {
+		"discord-interactions": "^4.1.0",
+		"hono": "^4.6.3"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20241004.0",
+		"@types/bun": "^1.1.10",
+		"typescript": "^5.6.2",
+		"wrangler": "^3.80.0"
+	}
 }
