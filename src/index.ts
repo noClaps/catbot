@@ -82,6 +82,8 @@ async function verifyDiscordRequest(request: HonoRequest, env: any) {
 		(await verifyKey(body, signature, timestamp, env.DISCORD_PUBLIC_KEY));
 
 	if (!isValidRequest) return { isValid: false };
+
+	console.log("Verification request body: ", body);
 	return {
 		interaction: JSON.parse(body),
 		isValid: true,
