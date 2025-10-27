@@ -21,17 +21,3 @@ A Discord bot to generate images of cats. The bot is powered by the [CATAAS (Cat
    ```
 
 4. Install the bot to your server using the install link in the developer portal, and type `/cat` to get started!
-
-## Bot commands
-
-```
-/cat [tag: string] [text: string]
-```
-
-### `tag`
-
-A tag to describe the kind of cat you'd like. There is a list of tags available [here](https://cataas.com/api/tags), and the command will provide autocompletion for tags as you type them.
-
-### `text`
-
-Adds text to the image. There is currently no way to customise the font size and color. For some reason, some strings aren't compatible with the API, so if you've input text and you're getting a blank block instead of an image, that may be why it's happening.

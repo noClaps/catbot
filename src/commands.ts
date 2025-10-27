@@ -7,61 +7,16 @@ import { JSONResponse } from "./index";
 export const CAT_COMMAND = {
   name: "cat",
   description: "KITTY!",
-  options: [
-    {
-      type: 3,
-      name: "tag",
-      description: "What kind of kitty you like?",
-      autocomplete: true,
-    },
-    { type: 3, name: "text", description: "Make the cat say something!" },
-  ],
 };
 
 export async function catCommand(
   interaction: any,
-  availableTags: string[],
 ): Promise<Response | JSONResponse> {
-  const tag = interaction.data.options?.find((opt: any) => opt.name === "tag")
-    ?.value as string;
-  const text = interaction.data.options?.find((opt: any) => opt.name === "text")
-    ?.value as string;
-
-  if (!availableTags.includes(tag ?? "")) {
-    return new JSONResponse({
-      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-      data: {
-        content:
-          "That's not an available tag, please try again with one of the suggested tags",
-        flags: InteractionResponseFlags.EPHEMERAL,
-      },
-    });
-  }
-
-  let catImageURL: string;
-
-  switch (true) {
-    case tag && !text:
-      catImageURL = `https://cataas.com/cat/${tag}`;
-      break;
-
-    case !tag && !!text:
-      catImageURL = `https://cataas.com/cat/says/${encodeURIComponent(text)}`;
-      break;
-
-    case tag && !!text:
-      catImageURL = `https://cataas.com/cat/${tag}/says/${encodeURIComponent(text)}`;
-      break;
-
-    default:
-      catImageURL = `https://cataas.com/cat`;
-  }
+  let catImageURL = "https://cataas.com/cat";
 
   console.log(
     `
     server ID: ${interaction.guild_id},
-    tag: ${tag},
-    text: ${text},
     image URL: ${catImageURL}
     `,
   );

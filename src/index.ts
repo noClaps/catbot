@@ -29,10 +29,6 @@ router.get("/", (c) => {
 router.post("/", async (c) => {
   const { req, env } = c;
 
-  const availableTags = (await fetch("https://cataas.com/api/tags").then((r) =>
-    r.json(),
-  )) as string[];
-
   const { isValid, interaction } = await server.verifyDiscordRequest(req, env);
   if (!isValid || !interaction) {
     return new Response("Bad request signature", { status: 401 });
@@ -42,26 +38,6 @@ router.post("/", async (c) => {
     return new JSONResponse({ type: InteractionResponseType.PONG });
   }
 
-  if (interaction.type === InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE) {
-    const focusedOption = interaction.data.options.find(
-      (opt: any) => opt.focused === true,
-    )?.value as string;
-
-    const filtered = availableTags.filter(
-      (choice) =>
-        choice && choice.toLowerCase().startsWith(focusedOption.toLowerCase()),
-    );
-
-    return new JSONResponse({
-      type: InteractionResponseType.APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
-      data: {
-        choices: filtered
-          .slice(0, 25)
-          .map((choice) => ({ name: choice, value: choice })),
-      },
-    });
-  }
-
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     if (
       interaction.data.name.toLowerCase() !== CAT_COMMAND.name.toLowerCase()
@@ -69,7 +45,7 @@ router.post("/", async (c) => {
       return new JSONResponse({ error: "Unknown type" }, { status: 400 });
     }
 
-    return await catCommand(interaction, availableTags);
+    return await catCommand(interaction);
   }
 });
 
