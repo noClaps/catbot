@@ -1,7 +1,7 @@
 import { CAT_COMMAND } from "./commands";
 
-const token = Bun.env.DISCORD_TOKEN;
-const applicationId = Bun.env.DISCORD_APPLICATION_ID;
+const token = process.env.DISCORD_TOKEN;
+const applicationId = process.env.DISCORD_APPLICATION_ID;
 
 if (!token) {
   throw new Error("Discord token not found");
