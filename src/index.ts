@@ -6,18 +6,6 @@ import {
 import { Hono, HonoRequest } from "hono";
 import { CAT_COMMAND, catCommand } from "./commands";
 
-export class JSONResponse extends Response {
-  constructor(body: any, init?: ResponseInit) {
-    const jsonBody = JSON.stringify(body);
-    init = init || {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
-    super(jsonBody, init);
-  }
-}
-
 const router = new Hono();
 
 router.get("/", (c) => {
@@ -35,14 +23,14 @@ router.post("/", async (c) => {
   }
 
   if (interaction.type === InteractionType.PING) {
-    return new JSONResponse({ type: InteractionResponseType.PONG });
+    return Response.json({ type: InteractionResponseType.PONG });
   }
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     if (
       interaction.data.name.toLowerCase() !== CAT_COMMAND.name.toLowerCase()
     ) {
-      return new JSONResponse({ error: "Unknown type" }, { status: 400 });
+      return Response.json({ error: "Unknown type" }, { status: 400 });
     }
 
     return await catCommand(interaction);

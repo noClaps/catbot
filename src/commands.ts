@@ -2,16 +2,13 @@ import {
   InteractionResponseFlags,
   InteractionResponseType,
 } from "discord-interactions";
-import { JSONResponse } from "./index";
 
 export const CAT_COMMAND = {
   name: "cat",
   description: "KITTY!",
 };
 
-export async function catCommand(
-  interaction: any,
-): Promise<Response | JSONResponse> {
+export async function catCommand(interaction: any): Promise<Response> {
   let catImageURL = "https://cataas.com/cat";
 
   console.log(
@@ -30,7 +27,7 @@ export async function catCommand(
 
   if (!response || !response.ok) {
     console.log("Request to cataas.com failed");
-    return new JSONResponse({
+    return Response.json({
       type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
       data: {
         content: `Something went wrong, please try again later :(`,
