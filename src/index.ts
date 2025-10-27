@@ -5,7 +5,11 @@ import {
 } from "discord-interactions";
 import { CAT_COMMAND, catCommand } from "./commands";
 
-async function fetch(req: Request): Promise<Response> {
+type Env = {
+  DISCORD_PUBLIC_KEY: string;
+};
+
+async function fetch(req: Request, env: Env): Promise<Response> {
   switch (req.method) {
     case "GET": {
       return new Response(
@@ -14,7 +18,6 @@ async function fetch(req: Request): Promise<Response> {
       );
     }
     case "POST": {
-      const env = process.env;
       const { isValid, interaction } = await verifyDiscordRequest(req, env);
       if (!isValid || !interaction) {
         return new Response("Bad request signature", { status: 401 });
@@ -31,7 +34,7 @@ async function fetch(req: Request): Promise<Response> {
           return Response.json({ error: "Unknown type" }, { status: 400 });
         }
 
-        return await catCommand(interaction);
+        return catCommand(interaction);
       }
     }
     default:
@@ -39,7 +42,7 @@ async function fetch(req: Request): Promise<Response> {
   }
 }
 
-async function verifyDiscordRequest(request: Request, env: any) {
+async function verifyDiscordRequest(request: Request, env: Env) {
   const signature = request.headers.get("x-signature-ed25519");
   const timestamp = request.headers.get("x-signature-timestamp");
   const body = await request.text();
