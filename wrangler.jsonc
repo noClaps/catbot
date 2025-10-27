@@ -1,0 +1,8 @@
+{
+  "name": "catbot",
+  "compatibility_date": "2025-10-27",
+  "main": "./src/index.ts",
+  "observability": {
+    "enabled": true,
+  },
+}
