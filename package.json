@@ -1,7 +1,7 @@
 {
   "name": "catbot",
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.0.2",
     "discord-interactions": "^4.4.0"
   }
 }
