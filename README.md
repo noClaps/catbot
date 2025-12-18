@@ -16,8 +16,7 @@ A Discord bot to generate images of cats. The bot is powered by the [CATAAS (Cat
 3. Install dependencies, and start the bot. You will need a Cloudflare Worker named "catbot".
 
    ```sh
-   bun install
-   bun run deploy
+   npx wrangler deploy
    ```
 
 4. Install the bot to your server using the install link in the developer portal, and type `/cat` to get started!
