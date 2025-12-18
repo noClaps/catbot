@@ -1,0 +1,13 @@
+on: [push, workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: codeberg-tiny-lazy
+    steps:
+      - uses: https://code.forgejo.org/actions/checkout@v6
+      - uses: https://code.forgejo.org/actions/setup-node@v6
+        with:
+          node-version: "*"
+      - run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
